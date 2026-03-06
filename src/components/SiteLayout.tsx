@@ -13,6 +13,7 @@ type RouteSeo = {
 };
 
 const baseUrl = 'https://montanawana.org';
+const logoUrl = `${baseUrl}/logo-montana.png`;
 const defaultKeywords =
   'PT Montana Wana Teknologi, Ekosistem Montana AI, UMKM Peternakan, Edukasi Digital, Konsultasi Perizinan, Smart Forestry, Monitoring Lingkungan';
 
@@ -28,6 +29,14 @@ const routeSeoMap: Record<string, RouteSeo> = {
       '@type': 'WebSite',
       name: 'PT Montana Wana Teknologi',
       url: baseUrl,
+      publisher: {
+        '@type': 'Organization',
+        name: 'PT Montana Wana Teknologi',
+        logo: {
+          '@type': 'ImageObject',
+          url: logoUrl,
+        },
+      },
       potentialAction: {
         '@type': 'SearchAction',
         target: `${baseUrl}/?q={search_term_string}`,
@@ -251,9 +260,11 @@ const SiteLayout = () => {
     ensureMeta('og:description', seo.description, 'property');
     ensureMeta('og:url', currentUrl, 'property');
     ensureMeta('og:site_name', 'PT Montana Wana Teknologi', 'property');
+    ensureMeta('og:image', logoUrl, 'property');
     ensureMeta('twitter:title', seo.title, 'name');
     ensureMeta('twitter:description', seo.description, 'name');
     ensureMeta('twitter:card', 'summary_large_image', 'name');
+    ensureMeta('twitter:image', logoUrl, 'name');
 
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalLink) {
