@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: #030807;
+  --bg-mid: #072018;
+  --forest: #14532d;
+  --emerald: #34d399;
+  --text-main: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 18% 10%, rgba(52, 211, 153, 0.14), transparent 40%),
+    radial-gradient(circle at 82% 72%, rgba(22, 163, 74, 0.16), transparent 38%),
+    linear-gradient(180deg, var(--bg-mid), var(--bg-deep));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Sora', 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+}
+
+.section-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+::selection {
+  background: rgba(52, 211, 153, 0.3);
+  color: white;
+}
+
+.keyword-wall-section {
+  backdrop-filter: blur(10px);
+}
+
+.keyword-open-section {
+  backdrop-filter: blur(6px);
+}
+
+.globe-orb {
+  position: relative;
+  width: min(74vw, 620px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.28),
+    0 0 40px rgba(14, 165, 233, 0.26),
+    0 48px 90px rgba(2, 8, 23, 0.85);
+}
+
+.globe-earth-map,
+.globe-cloud-map,
+.globe-shade,
+.globe-highlight {
+  position: absolute;
+  inset: 0;
+}
+
+.globe-earth-map {
+  background-image: url('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg');
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  animation: globeTextureSpin 34s linear infinite;
+}
+
+.globe-cloud-map {
+  background-image: url('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png');
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  mix-blend-mode: screen;
+  opacity: 0.26;
+  animation: globeTextureSpinReverse 24s linear infinite;
+}
+
+.globe-shade {
+  background: radial-gradient(circle at 68% 38%, transparent 32%, rgba(0, 0, 0, 0.32) 72%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+.globe-highlight {
+  background: radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0.08) 20%, transparent 44%);
+}
+
+.keyword-lane {
+  display: flex;
+  width: max-content;
+  gap: 0.62rem;
+  will-change: transform;
+}
+
+.keyword-lane-group {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.62rem;
+}
+
+.keyword-lane-left {
+  animation: keywordLaneLeft 52s linear infinite;
+}
+
+.keyword-lane-right {
+  animation: keywordLaneRight 52s linear infinite;
+}
+
+@keyframes globeTextureSpin {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: -200% 50%;
+  }
+}
+
+@keyframes globeTextureSpinReverse {
+  from {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: 300% 50%;
+  }
+}
+
+@keyframes keywordLaneLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes keywordLaneRight {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
