@@ -10,10 +10,12 @@ type RouteSeo = {
   schema: object;
   keywords?: string;
   path?: string;
+  image?: string;
 };
 
 const baseUrl = 'https://montanawana.org';
 const logoUrl = `${baseUrl}/logo-montana.png`;
+const publicationCoverUrl = 'https://i.ibb.co.com/HLFy3K4J/Chat-GPT-Image-8-Mar-2026-17-41-42.png';
 const defaultKeywords =
   'PT Montana Wana Teknologi, Ekosistem Montana AI, UMKM Peternakan, Edukasi Digital, Konsultasi Perizinan, Smart Forestry, Monitoring Lingkungan';
 
@@ -149,14 +151,18 @@ const routeSeoMap: Record<string, RouteSeo> = {
   '/publikasi-teknologi': {
     title: 'Publikasi Teknologi Montana AI | Monitoring Vegetasi dan Reklamasi Lahan',
     description:
-      'Publikasi ilmiah populer mengenai inovasi Montana AI untuk monitoring vegetasi, reklamasi lahan, analisis kesehatan tanaman, dan dokumentasi antarmuka sistem.',
+      'Publikasi ilmiah teknologi Montana Camera AI untuk monitoring vegetasi dan verifikasi reklamasi lahan berkelanjutan dengan geotagging real-time.',
     keywords:
-      'publikasi teknologi montana ai, monitoring vegetasi, reklamasi lahan, analisis kesehatan tanaman, publikasi ilmiah populer',
+      'Montana Camera AI, publikasi teknologi, monitoring vegetasi, reklamasi lahan, geotagging real-time, Zenodo, DOI',
     path: '/publikasi-teknologi',
+    image: publicationCoverUrl,
     schema: {
       '@context': 'https://schema.org',
       '@type': 'TechArticle',
       headline: 'Publikasi Teknologi Montana AI untuk Monitoring Vegetasi dan Reklamasi Lahan',
+      name: 'Montana Camera AI: Inovasi Sistem Pemantauan Geotagging Real-Time untuk Verifikasi Lahan Reklamasi Berkelanjutan',
+      description:
+        'Dokumentasi ilmiah populer teknologi Montana Camera AI untuk pemantauan vegetasi, geotagging observasi, dan verifikasi reklamasi lahan berkelanjutan.',
       author: {
         '@type': 'Person',
         name: 'Agung Laksono',
@@ -169,10 +175,32 @@ const routeSeoMap: Record<string, RouteSeo> = {
           url: logoUrl,
         },
       },
+      image: publicationCoverUrl,
+      mainEntityOfPage: `${baseUrl}/publikasi-teknologi`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'PT Montana Wana Teknologi',
+        url: baseUrl,
+      },
+      identifier: 'https://doi.org/10.5281/zenodo.18908912',
+      sameAs: ['https://doi.org/10.5281/zenodo.18908912'],
+      url: `${baseUrl}/publikasi-teknologi`,
+      inLanguage: 'id-ID',
+      copyrightYear: 2026,
+      dateCreated: '2026-03-08',
       datePublished: '2026-03-08',
       dateModified: '2026-03-08',
-      inLanguage: 'id-ID',
-      url: `${baseUrl}/publikasi-teknologi`,
+      about: [
+        'Monitoring vegetasi',
+        'Reklamasi lahan berkelanjutan',
+        'Geotagging real-time',
+        'Analisis kesehatan tanaman berbasis citra',
+      ],
+      citation: 'https://doi.org/10.5281/zenodo.18908912',
+      provider: {
+        '@type': 'Organization',
+        name: 'Zenodo',
+      },
     },
   },
   '/portfolio': {
@@ -271,6 +299,7 @@ const SiteLayout = () => {
     const currentPath = seo.path ?? location.pathname;
     const currentUrl = `${baseUrl}${currentPath}`;
     const currentKeywords = seo.keywords ?? defaultKeywords;
+    const currentImage = seo.image ?? logoUrl;
 
     document.title = seo.title;
 
@@ -290,11 +319,11 @@ const SiteLayout = () => {
     ensureMeta('og:description', seo.description, 'property');
     ensureMeta('og:url', currentUrl, 'property');
     ensureMeta('og:site_name', 'PT Montana Wana Teknologi', 'property');
-    ensureMeta('og:image', logoUrl, 'property');
+    ensureMeta('og:image', currentImage, 'property');
     ensureMeta('twitter:title', seo.title, 'name');
     ensureMeta('twitter:description', seo.description, 'name');
     ensureMeta('twitter:card', 'summary_large_image', 'name');
-    ensureMeta('twitter:image', logoUrl, 'name');
+    ensureMeta('twitter:image', currentImage, 'name');
 
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalLink) {

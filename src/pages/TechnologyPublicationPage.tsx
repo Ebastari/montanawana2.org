@@ -125,6 +125,13 @@ const TechnologyPublicationPage = () => {
                     <span className="text-slate-400"> - Penulis Utama</span>
                   </p>
 
+                  <div className="mt-3 rounded-xl border border-emerald-300/20 bg-emerald-400/5 p-3">
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-emerald-300">Identitas Karya</p>
+                    <p className="mt-2 text-sm font-medium leading-relaxed text-white">
+                      Montana Camera AI: Inovasi Sistem Pemantauan Geotagging Real-Time untuk Verifikasi Lahan Reklamasi Berkelanjutan
+                    </p>
+                  </div>
+
                   <div className="mt-4 overflow-hidden rounded-xl border border-white/10">
                     <table className="w-full text-left text-[15px] text-slate-200">
                       <thead className="bg-slate-800/70 text-[11px] uppercase tracking-[0.11em] text-emerald-300">
@@ -139,8 +146,36 @@ const TechnologyPublicationPage = () => {
                           <td className="px-3 py-2 text-white">Agung Laksono</td>
                         </tr>
                         <tr>
+                          <td className="px-3 py-2 text-slate-300">Judul Karya</td>
+                          <td className="px-3 py-2 text-white">
+                            Montana Camera AI: Inovasi Sistem Pemantauan Geotagging Real-Time untuk Verifikasi Lahan Reklamasi
+                            Berkelanjutan
+                          </td>
+                        </tr>
+                        <tr>
                           <td className="px-3 py-2 text-slate-300">Tanggal Publikasi</td>
                           <td className="px-3 py-2 text-white">8 Maret 2026</td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 text-slate-300">Tahun Publikasi</td>
+                          <td className="px-3 py-2 text-white">2026</td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 text-slate-300">Repositori</td>
+                          <td className="px-3 py-2 text-white">Zenodo</td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 text-slate-300">DOI</td>
+                          <td className="px-3 py-2">
+                            <a
+                              href="https://doi.org/10.5281/zenodo.18908912"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-emerald-200 underline decoration-emerald-300/50 underline-offset-2 hover:text-emerald-100"
+                            >
+                              https://doi.org/10.5281/zenodo.18908912
+                            </a>
+                          </td>
                         </tr>
                         <tr>
                           <td className="px-3 py-2 text-slate-300">Jenis Dokumen</td>
