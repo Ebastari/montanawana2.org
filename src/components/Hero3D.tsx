@@ -1,47 +1,10 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 type Hero3DProps = {
   onExplore?: () => void;
 };
-
-type InfoScene = {
-  label: string;
-  title: string;
-  description: string;
-  bullets: string[];
-};
-
-const infoScenes: InfoScene[] = [
-  {
-    label: 'Global View',
-    title: 'Welcome To Montana AI Ecosystem',
-    description: 'Artificial Intelligence for Environmental Sustainability.',
-    bullets: ['Global environmental observability', 'AI-driven geospatial monitoring'],
-  },
-  {
-    label: 'Asia Region',
-    title: 'Environmental Intelligence',
-    description:
-      'Platform teknologi yang mengintegrasikan kehutanan, reklamasi tambang, dan analisis lingkungan berbasis AI.',
-    bullets: ['Forestry intelligence', 'Mine reclamation analytics', 'Environmental risk prediction'],
-  },
-  {
-    label: 'Indonesia Focus',
-    title: 'Montana Digital Ecosystem',
-    description: 'Ekosistem platform digital untuk operasional dan inovasi berkelanjutan di Indonesia.',
-    bullets: [
-      'montanawana.org',
-      'konsultasi.montanawana.org',
-      'reklamasi.montanawana.org',
-      'umkm.montanawana.org',
-      'ai.montanawana.org',
-    ],
-  },
-];
 
 const storyStops = [
   {
@@ -83,44 +46,7 @@ const atmosphereFragment = `
 const Hero3D = ({ onExplore }: Hero3DProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const canvasWrapRef = useRef<HTMLDivElement | null>(null);
-  const infoRef = useRef<HTMLDivElement | null>(null);
-  const activeInfoRef = useRef(0);
   const isDraggingRef = useRef(false);
-  const showInfoRef = useRef(false);
-
-  const [activeInfo, setActiveInfo] = useState(0);
-  const [displayInfo, setDisplayInfo] = useState(0);
-  const [showInfo, setShowInfo] = useState(false);
-
-  useEffect(() => {
-    if (!infoRef.current || !showInfo) {
-      return;
-    }
-
-    const timeline = gsap.timeline();
-    timeline
-      .to(infoRef.current, {
-        opacity: 0,
-        y: 12,
-        scale: 0.985,
-        filter: 'blur(6px)',
-        duration: 0.48,
-        ease: 'power2.inOut',
-      })
-      .add(() => setDisplayInfo(activeInfo))
-      .to(infoRef.current, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        filter: 'blur(0px)',
-        duration: 0.95,
-        ease: 'power2.inOut',
-      });
-
-    return () => {
-      timeline.kill();
-    };
-  }, [activeInfo, showInfo]);
 
   useEffect(() => {
     const sectionEl = sectionRef.current;
@@ -243,12 +169,10 @@ const Hero3D = ({ onExplore }: Hero3DProps) => {
     controls.addEventListener('end', onControlEnd);
 
     let frameId = 0;
-    const clock = new THREE.Clock();
     let spinAccumulator = 0;
 
     const animate = (): void => {
       frameId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
 
       const rect = sectionEl.getBoundingClientRect();
       const maxScroll = Math.max(1, rect.height - window.innerHeight);
@@ -278,21 +202,6 @@ const Hero3D = ({ onExplore }: Hero3DProps) => {
       earth.rotation.y = spinAccumulator;
       clouds.rotation.y = spinAccumulator * 1.18;
       stars.rotation.y += 0.00006;
-
-      const normalized = (((earthPivot.rotation.y + earth.rotation.y) % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-      const narrativeByRotation = Math.floor((normalized / (Math.PI * 2)) * infoScenes.length) % infoScenes.length;
-      const narrativeByScroll = Math.round(scaled);
-      const nextInfo = Math.max(narrativeByRotation, narrativeByScroll);
-
-      if (!showInfoRef.current && (scrollProgress > 0.03 || Math.abs(elapsed) > 0.9)) {
-        showInfoRef.current = true;
-        setShowInfo(true);
-      }
-
-      if (nextInfo !== activeInfoRef.current) {
-        activeInfoRef.current = nextInfo;
-        setActiveInfo(nextInfo);
-      }
 
       controls.update();
       renderer.render(scene, camera);
@@ -333,56 +242,32 @@ const Hero3D = ({ onExplore }: Hero3DProps) => {
   }, []);
 
   return (
-    <section id="hero" ref={sectionRef} className="relative min-h-[230vh] overflow-hidden">
+    <section id="hero" ref={sectionRef} className="relative min-h-[calc(100svh-4rem)] overflow-hidden">
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_20%_18%,rgba(16,185,129,0.16),transparent_38%),radial-gradient(circle_at_85%_80%,rgba(30,64,175,0.14),transparent_42%),linear-gradient(180deg,#02060a,#02070d)]" />
 
-      <div className="sticky top-0 flex min-h-screen items-center">
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-6 md:grid-cols-[0.86fr_1.14fr] md:px-10">
+      <div className="flex min-h-[calc(100svh-4rem)] items-center py-6 md:py-8">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-6 px-6 md:grid-cols-[0.86fr_1.14fr] md:px-10">
           <div>
-            <h1 className="max-w-xl text-4xl font-semibold leading-[1.05] text-white md:text-7xl">
-              Welcome To Montana AI Ecosystem
+            <h1 className="max-w-xl font-heading text-[clamp(2rem,4vw,4.6rem)] font-medium leading-[1.08] tracking-[-0.01em] text-white md:tracking-[-0.02em]">
+              Welcome to
+              <span className="mt-1 block font-semibold text-emerald-100 md:mt-2">Montana AI Ecosystem</span>
             </h1>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-slate-300 md:text-base">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-300 md:text-base">
               Artificial Intelligence for Environmental Sustainability.
             </p>
 
             <button
               type="button"
               onClick={() => onExplore?.()}
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-emerald-300/45 bg-emerald-300/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200 transition hover:bg-emerald-300/20"
+              className="mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/45 bg-emerald-300/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200 transition hover:bg-emerald-300/20"
             >
-              Expole
+              Explore
               <span aria-hidden="true">↓</span>
             </button>
 
-            <AnimatePresence>
-              {showInfo && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.8, ease: 'easeOut' }}
-                  className="mt-8"
-                >
-                  <div
-                    ref={infoRef}
-                    className="max-w-md rounded-2xl border border-white/5 bg-[linear-gradient(155deg,rgba(12,24,24,0.52),rgba(7,18,18,0.22))] p-5 shadow-[0_18px_50px_rgba(2,6,23,0.32)] backdrop-blur-2xl"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300">{infoScenes[displayInfo].label}</p>
-                    <h2 className="mt-2 text-lg font-semibold text-white">{infoScenes[displayInfo].title}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{infoScenes[displayInfo].description}</p>
-                    <ul className="mt-3 space-y-1 text-sm text-emerald-100/95">
-                      {infoScenes[displayInfo].bullets.map((item) => (
-                        <li key={item}>• {item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[820px]">
+          <div className="relative mx-auto w-full max-w-[760px]">
             <div className="relative aspect-square overflow-hidden rounded-full">
               <div className="pointer-events-none absolute inset-0 z-10 rounded-full bg-[radial-gradient(circle_at_30%_24%,rgba(255,255,255,0.12),transparent_34%),radial-gradient(circle_at_70%_72%,rgba(2,6,23,0.35),transparent_58%)]" />
               <div ref={canvasWrapRef} className="h-full w-full" />

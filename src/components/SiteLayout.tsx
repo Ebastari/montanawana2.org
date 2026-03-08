@@ -146,6 +146,35 @@ const routeSeoMap: Record<string, RouteSeo> = {
       operatingSystem: 'Web',
     },
   },
+  '/publikasi-teknologi': {
+    title: 'Publikasi Teknologi Montana AI | Monitoring Vegetasi dan Reklamasi Lahan',
+    description:
+      'Publikasi ilmiah populer mengenai inovasi Montana AI untuk monitoring vegetasi, reklamasi lahan, analisis kesehatan tanaman, dan dokumentasi antarmuka sistem.',
+    keywords:
+      'publikasi teknologi montana ai, monitoring vegetasi, reklamasi lahan, analisis kesehatan tanaman, publikasi ilmiah populer',
+    path: '/publikasi-teknologi',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: 'Publikasi Teknologi Montana AI untuk Monitoring Vegetasi dan Reklamasi Lahan',
+      author: {
+        '@type': 'Person',
+        name: 'Agung Laksono',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'PT Montana Wana Teknologi',
+        logo: {
+          '@type': 'ImageObject',
+          url: logoUrl,
+        },
+      },
+      datePublished: '2026-03-08',
+      dateModified: '2026-03-08',
+      inLanguage: 'id-ID',
+      url: `${baseUrl}/publikasi-teknologi`,
+    },
+  },
   '/portfolio': {
     title: 'Portofolio | Proyek Impact Montana',
     description: 'Proyek impact PT Montana Wana Teknologi di bidang reklamasi tambang, digitalisasi peternakan, dan edukasi kehutanan.',
@@ -205,6 +234,7 @@ const routeOrder = [
   '/umkm-peternakan',
   '/edukasi-digital',
   '/environmental-monitoring',
+  '/publikasi-teknologi',
   '/portfolio',
   '/sustainability',
   '/roadmap',

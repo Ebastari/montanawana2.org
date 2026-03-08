@@ -9,6 +9,7 @@ import SolutionsPage from './pages/SolutionsPage';
 import UmkmPeternakanPage from './pages/UmkmPeternakanPage';
 import EdukasiDigitalPage from './pages/EdukasiDigitalPage';
 import EnvironmentalMonitoringPage from './pages/EnvironmentalMonitoringPage';
+import TechnologyPublicationPage from './pages/TechnologyPublicationPage';
 import PortfolioPage from './pages/PortfolioPage';
 import SustainabilityPage from './pages/SustainabilityPage';
 import RoadmapPage from './pages/RoadmapPage';
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/umkm-peternakan" element={<UmkmPeternakanPage />} />
           <Route path="/edukasi-digital" element={<EdukasiDigitalPage />} />
           <Route path="/environmental-monitoring" element={<EnvironmentalMonitoringPage />} />
+          <Route path="/publikasi-teknologi" element={<TechnologyPublicationPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/sustainability" element={<SustainabilityPage />} />
           <Route path="/roadmap" element={<RoadmapPage />} />
